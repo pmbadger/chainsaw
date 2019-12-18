@@ -1,11 +1,19 @@
 #include "unittest/unittest.h"
 
+const char* PASS = "PASS!";
+const char* FAIL = "FAIL!";
+const char* DEFAULT_ASSERT_MESSAGE = "Assertion failed!";
+
+int TOTAL = 0;
+int SUCCESS = 0;
+
 
 bool assert(bool expression, const char* message) {
     if (!expression) {
         printf("%s\n", DEFAULT_ASSERT_MESSAGE);
         printf("%s\n", message);
     }
+    return expression;
 }
 
 void unit_test(bool expression, const char* subject) {
@@ -27,7 +35,7 @@ bool all_pass() {
 bool report() {
     printf("%s ", all_pass()? "All checks successful!" : "Some tests have failed");
     printf("[%d / %d]\n", SUCCESS, TOTAL);
-    printf("Total coverage: %.2f%\n", coverage());
+    printf("Total coverage: %.2f%%\n", coverage());
     return TOTAL - SUCCESS;
 }
 
