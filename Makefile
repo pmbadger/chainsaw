@@ -1,7 +1,7 @@
 # Directories
 SOURCE_DIR=src
 INCLUDE_DIR=include
-BUILD_DIR=build
+BUILD_DIR=bin
 TEST_DIR=test
 LOG_DIR=log
 
