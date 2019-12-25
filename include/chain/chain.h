@@ -22,6 +22,8 @@ Chain new_chain(size_t item_size);
 
 bool is_empty(Chain chain);
 
+int length(Chain chain);
+
 void* link(Chain chain);
 
 void* pull(Chain chain, int index);

@@ -5,6 +5,7 @@
 int main() {
     Chain items = new_chain(sizeof(int));
     unit_test(is_empty(items), "Newly created chain is empty");
+    unit_test(length(items) == 0, "Which means it has length of zero");
 
     void* head = *items.head; 
     int* item = (int*)link(items);
@@ -13,6 +14,8 @@ int main() {
 
     link(items);
     link(items);
+    unit_test(length(items) == 3, "Adding items increases chain's length");
+
     release(items);
     unit_test(is_empty(items), "After release chain is empty again");
 

@@ -16,6 +16,17 @@ void* advance(Chain chain, void* node) {
     return (void**)((size_t)node + chain.width);
 }
 
+int length(Chain chain) {
+    int length = 0;
+    void** node = chain.head;
+    while(*node) {
+        node = *node;
+        node = advance(chain, node);
+        length++;
+    }
+    return length;
+}
+
 void* link(Chain chain) {
 	int node_size = chain.width + PTR_SIZE;
 	void* new_node = malloc(node_size);
