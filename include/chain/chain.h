@@ -26,6 +26,8 @@ void* link(Chain chain);
 
 void* pull(Chain chain, int index);
 
+void* advance(Chain chain, void* node);
+
 void print(Chain chain);
 
 void release(Chain chain);

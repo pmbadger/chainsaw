@@ -12,6 +12,10 @@ bool is_empty(Chain chain) {
 	return *chain.head == NULL;
 }
 
+void* advance(Chain chain, void* node) {
+    return (void**)((size_t)node + chain.width);
+}
+
 void* link(Chain chain) {
 	int node_size = chain.width + PTR_SIZE;
 	void* new_node = malloc(node_size);
@@ -23,7 +27,7 @@ void* link(Chain chain) {
 		void** node = chain.head;
     	while (*node) {
         	node = *node;
-        	node = (void**)((size_t)node + chain.width);
+        	node = advance(chain, node);
 		}
     	*node = new_node;
 	}
@@ -38,7 +42,7 @@ void* pull(Chain chain, int index) {
     	while (*node) {
         	node = *node;
 			if (i == index) return node;
-        	node = (void**)((size_t)node + chain.width);
+        	node = advance(chain, node);
 			i++;
 		}
 	}
@@ -53,7 +57,7 @@ void print(Chain chain) {
 		while (*node) {
 			node = *node;
 			printf("%d ", *(int*)node);
-			node = (void**)((size_t)node + chain.width);
+        	node = advance(chain, node);
 		}
 		printf("\n");
 	}
@@ -69,7 +73,7 @@ void release(Chain chain) {
 				free(killer);
 			}
 			killer = node;
-			node = (void**)((size_t)node + chain.width);
+        	node = advance(chain, node);
 		}
 		free(killer);
 		*chain.head = NULL;
