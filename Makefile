@@ -13,17 +13,16 @@ LOG_COMPONENT=$(LOG_DIR)/$(COMPONENT)
 
 # Files
 TEST=$(TEST_DIR)/$(COMPONENT).test.c
-SOURCE=$(SOURCE_DIR)/$(COMPONENT)/*.c
+SOURCES=$(SOURCE_DIR)/**/*.c
 BUILD=$(BUILD_DIR)/$(COMPONENT).test
-UNITTEST=$(SOURCE_DIR)/unittest/*.c
 LOG=$(LOG_COMPONENT)/$(shell date +%Y-%m-%d_%H:%M:%S).log
 
 
-test: $(BUILD) $(LOG_COMPONENT)
+run: $(BUILD) $(LOG_COMPONENT)
 	$(BUILD) | tee $(LOG)
 
-$(BUILD): $(SOURCE) $(UNITTEST) $(BUILD_DIR)
-	gcc $(TEST) $(SOURCE) $(UNITTEST) -o $(BUILD) -I$(INCLUDE_DIR) -Wall
+$(BUILD): $(TEST) $(SOURCE) $(BUILD_DIR)
+	gcc $(TEST) $(SOURCES) -I $(INCLUDE_DIR) -o $(BUILD) -Wall
 
 $(BUILD_DIR):
 	@mkdir $(BUILD_DIR);
