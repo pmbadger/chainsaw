@@ -64,7 +64,7 @@ void* pull(Chain chain, int index) {
 
 void print(Chain chain) {
     if (is_empty(chain)) {
-        printf("Chain nodes: ");
+        printf("The chain is empty!\n");
     } else {
         for (
             void** node = chain.head;
