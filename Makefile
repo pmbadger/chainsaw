@@ -1,41 +1,38 @@
-# Directories
 SOURCE_DIR=src
 INCLUDE_DIR=include
 BUILD_DIR=bin
 TEST_DIR=test
 LOG_DIR=log
 
-# Component name
-TARGET=chain
-
-# Shortcuts
-LOG_TARGET=$(LOG_DIR)/$(TARGET)
-
-# Files
-TEST=$(TEST_DIR)/$(TARGET).test.c
 SOURCES=$(SOURCE_DIR)/**/*.c
-BUILD=$(BUILD_DIR)/$(TARGET).test
-LOG=$(LOG_TARGET)/$(shell date +%Y-%m-%d_%H:%M:%S).log
+COMPONENTS=chain math
+LOGFILE=$(shell date +%Y-%m-%d_%H:%M:%S).log
 
 
-run: $(BUILD) $(LOG_TARGET)
-	$(BUILD) | tee $(LOG)
+.PHONY: all clean %
+.PRECIOUS: $(BUILD_DIR)/%.test $(LOG_DIR)/%
 
-$(BUILD): $(TEST) $(SOURCES) $(BUILD_DIR)
-	gcc $(TEST) $(SOURCES) -I $(INCLUDE_DIR) -o $(BUILD) -Wall
+all: $(COMPONENTS)
+
+%: $(BUILD_DIR)/%.test | $(LOG_DIR)/%
+	-@$< > $|/$(LOGFILE)
+	@echo "$<:"
+	@grep -E "^|FAIL!|.{6}%" $|/$(LOGFILE) --color
+	@echo
+
+$(BUILD_DIR)/%.test: $(TEST_DIR)/%.test.c $(SOURCES) | $(BUILD_DIR)
+	gcc $< $(SOURCES) -I $(INCLUDE_DIR) -o $@ -Wall
 
 $(BUILD_DIR):
-	@mkdir $(BUILD_DIR);
+	@mkdir $@
 
-$(LOG_TARGET):
-	@mkdir -p $(LOG_TARGET);
+$(LOG_DIR)/%:
+	@mkdir -p $@
 
-clear: 
+clean:
 	@if [ -d $(LOG_DIR) ]; then du -h -a $(LOG_DIR); fi
 	@rm -rf $(LOG_DIR);
-
 	@if [ -d $(BUILD_DIR) ]; then du -h -a $(BUILD_DIR); fi
 	@rm -rf $(BUILD_DIR);
-
-	@echo Cleaned.
+	@echo Clean done.
 
