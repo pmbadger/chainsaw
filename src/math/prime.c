@@ -1,4 +1,4 @@
-#include "math/math.h"
+#include "math.h"
 
 
 Chain chain_primes(int bound) {

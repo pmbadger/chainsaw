@@ -1,5 +1,5 @@
-#include "chain/chain.h"
-#include "unittest/unittest.h"
+#include "chain.h"
+#include "unittest.h"
 
 
 int main() {

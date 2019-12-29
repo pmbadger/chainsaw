@@ -22,10 +22,8 @@ chainsaw
 ├── bin
 │   └── submodule1.test
 ├── include
-│   ├── submodule1
-│   │   └── submodule1.h
-│   └── submodule2
-│       └── submodule2.h
+│   ├── submodule1.h
+│   └── submodule2.h
 ├── src
 │   ├── submodule1
 │   │   └── submodule1.c
@@ -47,7 +45,7 @@ chainsaw
 **Only `.c` files**. Contains source code for each submodule, which can be found in the corresponding folder `src/submodule_name/`.
 
 ### include/
-**Only `.h` files**. Duplicates the hierarchy of `src/`, except it's purpose is storing *public headers*.
+**Only `.h` files**. Contains *public headers* for each submodule.
 
 ### test/
 Contains source code for tests: `submodule_name.test.c` for each `src/submodule_name/`.

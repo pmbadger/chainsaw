@@ -1,4 +1,4 @@
-#include "chain/chain.h"
+#include "chain.h"
 
 
 Chain new_chain(size_t width) {

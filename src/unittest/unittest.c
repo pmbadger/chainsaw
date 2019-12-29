@@ -1,4 +1,4 @@
-#include "unittest/unittest.h"
+#include "unittest.h"
 
 const char* PASS = "PASS!";
 const char* FAIL = "FAIL!";
