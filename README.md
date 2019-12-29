@@ -55,28 +55,33 @@ In order to clear the project, use `make clean`, which will also give you cleanu
 
 
 ## Project structure
-In general case project structure looks like this:
+In working stage project structure looks like this:
 ```
 chainsaw
 ├── bin
-│   └── submodule1.test
+│   ├── chain.test
+│   └── math.test
 ├── include
-│   ├── submodule1.h
-│   └── submodule2.h
+│   ├── chain.h
+│   ├── math.h
+│   └── unittest.h
 ├── src
-│   ├── submodule1
-│   │   └── submodule1.c
-│   └── submodule2
-│       └── submodule2.c
-│       └── some_extra_file.c
+│   ├── chain
+│   │   └── chain.c
+│   ├── math
+│   │   └── primes.c
+│   └── unittest
+│       └── unittest.c
 ├── test
-|   ├── submodule1.test.c
-|   └── submodule2.test.c
+│   ├── chain.test.c
+│   └── math.test.c
 ├── log
-│   └── submodule1
-│       └── 1999-12-31_23:59:59.log
-│       └── 2000-01-01_00:00:00.log
+│   ├── chain
+│   │   └── 2019-12-30_02:54:10.log
+│   └── math
+│       ├── 2019-12-30_02:54:11.log
+│       └── 2019-12-30_02:54:22.log
 ├── Makefile
-├── README.md
+└── README.md
 ```
 
