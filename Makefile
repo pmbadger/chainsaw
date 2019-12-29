@@ -5,30 +5,30 @@ BUILD_DIR=bin
 TEST_DIR=test
 LOG_DIR=log
 
-# Program name
-COMPONENT=chain
+# Component name
+TARGET=chain
 
 # Shortcuts
-LOG_COMPONENT=$(LOG_DIR)/$(COMPONENT)
+LOG_TARGET=$(LOG_DIR)/$(TARGET)
 
 # Files
-TEST=$(TEST_DIR)/$(COMPONENT).test.c
+TEST=$(TEST_DIR)/$(TARGET).test.c
 SOURCES=$(SOURCE_DIR)/**/*.c
-BUILD=$(BUILD_DIR)/$(COMPONENT).test
-LOG=$(LOG_COMPONENT)/$(shell date +%Y-%m-%d_%H:%M:%S).log
+BUILD=$(BUILD_DIR)/$(TARGET).test
+LOG=$(LOG_TARGET)/$(shell date +%Y-%m-%d_%H:%M:%S).log
 
 
-run: $(BUILD) $(LOG_COMPONENT)
+run: $(BUILD) $(LOG_TARGET)
 	$(BUILD) | tee $(LOG)
 
-$(BUILD): $(TEST) $(SOURCE) $(BUILD_DIR)
+$(BUILD): $(TEST) $(SOURCES) $(BUILD_DIR)
 	gcc $(TEST) $(SOURCES) -I $(INCLUDE_DIR) -o $(BUILD) -Wall
 
 $(BUILD_DIR):
 	@mkdir $(BUILD_DIR);
 
-$(LOG_COMPONENT):
-	@mkdir -p $(LOG_COMPONENT);
+$(LOG_TARGET):
+	@mkdir -p $(LOG_TARGET);
 
 clear: 
 	@if [ -d $(LOG_DIR) ]; then du -h -a $(LOG_DIR); fi
