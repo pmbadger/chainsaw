@@ -4,8 +4,8 @@ const char* PASS = "PASS!";
 const char* FAIL = "FAIL!";
 const char* DEFAULT_ASSERT_MESSAGE = "Assertion failed!";
 
-int TOTAL = 0;
-int SUCCESS = 0;
+static int TOTAL = 0;
+static int SUCCESS = 0;
 
 
 bool assert(bool expression, const char* message) {
