@@ -1,4 +1,5 @@
 #include "unittest.h"
+#include "colors.h"
 
 const char* PASS = "PASS!";
 const char* FAIL = "FAIL!";
@@ -10,17 +11,21 @@ static int SUCCESS = 0;
 
 bool assert(bool expression, const char* message) {
     if (!expression) {
-        printf("%s\n", DEFAULT_ASSERT_MESSAGE);
-        printf("%s\n", message);
+        printf(RED "%s\n" RESET, DEFAULT_ASSERT_MESSAGE);
+        printf(YEL "%s\n" RESET, message);
     }
     return expression;
 }
 
 void unit_test(bool expression, const char* subject) {
     TOTAL++;
-    printf("%d. %s: %s\n", TOTAL, subject, expression? PASS : FAIL);
+    printf(CYN "%d" RESET"." YEL " %s" RESET ":" RESET, TOTAL, subject);
     if (expression) { 
+    	printf(GRN " %s\n" RESET, PASS);    
         SUCCESS++;
+    }
+    else{
+    	printf(RED " %s\n" RESET, FAIL);    
     }
 }
 
