@@ -1,16 +1,19 @@
 #include "unittest.h"
+#include "colors.h"
 
-const char* PASS = "PASS!";
-const char* FAIL = "FAIL!";
-const char* DEFAULT_ASSERT_MESSAGE = "Assertion failed!";
+#define draw(COLOR, TEXT) COLOR TEXT RESET
 
-int TOTAL = 0;
-int SUCCESS = 0;
+#define PASS "PASS!"
+#define FAIL "FAIL!"
+#define DEFAULT_ASSERT_MESSAGE "Assertion failed!"
+
+static int TOTAL = 0;
+static int SUCCESS = 0;
 
 
 bool assert(bool expression, const char* message) {
     if (!expression) {
-        printf("%s\n", DEFAULT_ASSERT_MESSAGE);
+        printf("%s\n", draw(RED, DEFAULT_ASSERT_MESSAGE));
         printf("%s\n", message);
     }
     return expression;
@@ -18,7 +21,7 @@ bool assert(bool expression, const char* message) {
 
 void unit_test(bool expression, const char* subject) {
     TOTAL++;
-    printf("%d. %s: %s\n", TOTAL, subject, expression? PASS : FAIL);
+    printf( "%d. %s: %s\n", TOTAL, subject, expression? draw(GRN, PASS) : draw(RED, FAIL));
     if (expression) { 
         SUCCESS++;
     }
@@ -33,7 +36,7 @@ bool all_pass() {
 }
 
 bool report() {
-    printf("%s ", all_pass()? "All checks successful!" : "Some tests have failed");
+    printf("%s ", all_pass()? draw(GRN, "All checks successful!") : draw(RED, "Some tests have failed"));
     printf("[%d / %d]\n", SUCCESS, TOTAL);
     printf("Total coverage: %.2f%%\n", coverage());
     return TOTAL - SUCCESS;
