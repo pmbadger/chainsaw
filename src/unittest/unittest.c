@@ -1,11 +1,5 @@
 #include "unittest.h"
-#include "colors.h"
 
-#define draw(COLOR, TEXT) COLOR TEXT RESET
-
-#define PASS "PASS!"
-#define FAIL "FAIL!"
-#define DEFAULT_ASSERT_MESSAGE "Assertion failed!"
 
 static int TOTAL = 0;
 static int SUCCESS = 0;
